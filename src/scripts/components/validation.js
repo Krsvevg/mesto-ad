@@ -29,7 +29,7 @@ const checkInputValidity = (formElement, inputElement, validationSettings) => {
 };
 
 const hasInvalidInput = (inputList) => {
-  for (let i = 0; i < inputList.length; i++) {
+  for (let i = 0; i < inputList.length - 1; i++) {
     if (!inputList[i].validity.valid) {
       return true;
     }
