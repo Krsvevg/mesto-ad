@@ -29,12 +29,9 @@ const checkInputValidity = (formElement, inputElement, validationSettings) => {
 };
 
 const hasInvalidInput = (inputList) => {
-  for (let i = 0; i < inputList.length - 1; i++) {
-    if (!inputList[i].validity.valid) {
-      return true;
-    }
-  }
-  return false;
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
 };
 
 const disableSubmitButton = (buttonElement, validationSettings) => {
@@ -75,12 +72,13 @@ export const clearValidation = (formElement, validationSettings) => {
 
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, validationSettings);
+    inputElement.setCustomValidity("");
   });
 
   disableSubmitButton(buttonElement, validationSettings);
 };
 
- export const enableValidation = (validationSettings) => {
+export const enableValidation = (validationSettings) => {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 
   formList.forEach((formElement) => {
@@ -89,4 +87,4 @@ export const clearValidation = (formElement, validationSettings) => {
     });
     setEventListeners(formElement, validationSettings);
   });
- };
+};
